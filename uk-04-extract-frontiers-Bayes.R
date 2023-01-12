@@ -62,11 +62,19 @@ sfBorders_list$error
 ## Yeovil has errors 
 ##  burnley, 
 
+## Restructure as spatial dataframe.... 
+
+## Issue: this isn't working properly
+# out_results <-
+#   sfBorders_list$result %>%
+#   discard(is.null) %>%
+#   bind_rows(.id = 'ttwa')
+
 # 3. Save  ----------------------------------------------------------------
 
 sfBorders_list$result %>%
   saveRDS(
-    'temp/uk frontier borders list.rds'
+    'output/frontier borders layer.rds'
   )
 
 
