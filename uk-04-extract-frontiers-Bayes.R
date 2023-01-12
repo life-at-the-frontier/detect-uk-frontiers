@@ -5,8 +5,6 @@
 
 sfModels_path <- 'temp/uk frontier model list.rds'
 
-
-
 # 1. Load in models -------------------------------------------------------
 sfModel_list <- 
   sfModels_path %>%
@@ -58,9 +56,19 @@ sfBorders_list <-
   sfBorders_list %>% transpose
 
 ##  reported errors: 
-sfBorders_list$error
-## Yeovil has errors 
-##  burnley, 
+sfBorders_list$error %>%
+  discard(is.null)
+# $Bristol
+# <Rcpp::eval_error in CPL_geos_op2(op, st_geometry(x), st_geometry(y)): Evaluation error: TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point 360882.91511309094 171106.81981253525 at 360882.91511309094 171106.81981253525.>
+#   
+#   $Burnley
+# <Rcpp::eval_error in CPL_geos_op2(op, st_geometry(x), st_geometry(y)): Evaluation error: TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point 385903.88259071077 439853.55665713502 at 385903.88259071077 439853.55665713502.>
+#   
+#   $Penzance
+# <simpleError in frontier_as_sf(y, silent = T): Not a frontier_model object; please run frontier_detect()>
+#   
+#   $Yeovil
+# <Rcpp::eval_error in CPL_geos_op2(op, st_geometry(x), st_geometry(y)): Evaluation error: TopologyException: Input geom 1 is invalid: Ring Self-intersection at or near point 362040.18361719657 114934.77847173659 at 362040.18361719657 114934.77847173659.>
 
 ## Restructure as spatial dataframe.... 
 

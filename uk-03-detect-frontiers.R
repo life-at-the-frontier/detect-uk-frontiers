@@ -90,7 +90,7 @@ model_sf$ttwa11nm %>% table
 
 output_list <-
   model_sf %>%
-  filter(ttwa11nm %in% c('Sheffield', 'York', 'Yeovil')) %>%
+#  filter(ttwa11nm %in% c('Sheffield', 'York', 'Yeovil')) %>%
   split(.$ttwa11nm) %>%
   map(.f =
         safely(function(this_data) {
@@ -104,6 +104,14 @@ output_list <-
 output_list <-
   output_list %>% transpose()
 
+# check errors 
+output_list$error %>%
+  discard(is.null)
+
+## only one error
+# $Penzance
+# <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
+  
 
 # 4. Save -----------------------------------------------------------------
 
