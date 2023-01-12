@@ -34,8 +34,8 @@ sfBorders_list <-
         out <-
           out %>%
           transmute(
-            zoneID_a = y$data$lsoa11cd[id],
-            zoneID_b = y$data$lsoa11cd[id.1],
+            zoneID_a = y$data$zoneID[id],
+            zoneID_b = y$data$zoneID[id.1],
             phi_a = phi,
             phi_b = phi.1,
             diff_phi = abs(phi - phi.1),
@@ -62,8 +62,6 @@ sfBorders_list$error
 ## Yeovil has errors 
 ##  burnley, 
 
-
-sfBorders_list
 # 3. Save  ----------------------------------------------------------------
 
 sfBorders_list$result %>%

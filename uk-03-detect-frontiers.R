@@ -77,13 +77,7 @@ model_sf <-
 # 3. Running the model over forLoop ---------------------------------------
 ##  Output is a list of models
 
-these_ttwas <- 
-  model_sf$ttwa11nm %>% unique
-
 ## wrap the function up in an error catcher 
-safely_frontier_detect <- 
-  safely(frontier_detect)
-
 ## Example of error catching
 # safe_log <- safely(log)
 # safe_log(10)
@@ -92,22 +86,20 @@ safely_frontier_detect <-
 # list("a", 10, 100) %>%
 #   map(safe_log) %>%
 #   transpose()
+model_sf$ttwa11nm %>% table
 
 output_list <-
   model_sf %>%
-  filter(ttwa11nm %in% c('York', 'Yeovil')) %>%
+  filter(ttwa11nm %in% c('Sheffield', 'York', 'Yeovil')) %>%
   split(.$ttwa11nm) %>%
-  map(
-    .f = function(this_data){
-      this_data$ttwa11nm[1] %>% paste('in progress') %>% print
-      
-      safely_frontier_detect(
-        data = this_data, 
-        y = 'nonUKBorn', 
-        n.trials = 'allResidents'
-      )
-    }
-  )
+  map(.f =
+        safely(function(this_data) {
+          this_data$ttwa11nm[1] %>% paste('in progress') %>% print
+          
+          frontier_detect(data = this_data,
+                          y = 'nonUKBorn',
+                          n.trials = 'allResidents')
+        }))
 
 output_list <-
   output_list %>% transpose()
@@ -119,6 +111,6 @@ output_list$result %>%
   saveRDS(
     'temp/uk frontier model list.rds'
   )
-
+## This is also the base tile
 
 ##  Done

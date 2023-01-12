@@ -41,6 +41,12 @@ cob2011_sf <-
     by = c('lsoa11cd' = 'zoneID')
   )
 
+cob2011_sf <-
+  cob2011_sf %>% 
+  rename(
+    zoneID = lsoa11cd
+  )
+
 ##  3. Load ttwa 
 
 ttwa11_sf <-
