@@ -22,13 +22,27 @@ sfBorders_list <-
       safely(function(x, y) {
         x %>% paste('in progress') %>% print()
         
+        
+        ### Step 1: Extract the edgelist only and get the sd(phi_a - phi_b)
+        ## for all borders including frontiers
+        out <-
+          frontier_as_sf(
+            y,
+            non_frontiers = T,
+            edgelistOnly = T,
+            silent = T
+          )
+        
+        sd_diff_phi <- sd(out$phi - out$phi.1)
+        ## step 2: extract the actual frontiers only as geometry
+        
         out <-
           frontier_as_sf(
             y,
             silent = T
           )
         
-        # ## adhoc (can remove without effect); save LSOA11cd
+        
         out <-
           out %>%
           transmute(
@@ -37,7 +51,7 @@ sfBorders_list <-
             phi_a = phi,
             phi_b = phi.1,
             diff_phi = abs(phi - phi.1),
-            std_diff_phi = diff_phi / sd( (phi - phi.1) ),
+            std_diff_phi = diff_phi / sd_diff_phi ,
             geometry = geometry
           )
 

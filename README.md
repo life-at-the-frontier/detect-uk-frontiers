@@ -49,19 +49,6 @@ For a border adjoining aerial units $A_1$ and $A_2$, we can work out:
 
 In the Dean et al. paper, a statistically significant frontier is a border with no spatial autocorrelation (as determined by $W$) and where the 95% credible interval for.$\phi$ does not overlap with zero. However, not all significant frontiers are substantial.
 
-
-## Sweden
-
-For the Swedish areal unit, data by DeSo is used. We use population data on the number of foreign-born individuals residing in a DeSo in 2020 (available [here](https://www.scb.se/vara-tjanster/oppna-data/oppna-geodata/deso--demografiska-statistikomraden/)). An urban area is defined by Tartorter (2018 boundary definition).
-
-In total, Sweden has 15,914 borders with 9,851 statistically significant frontiers.
-
-## Norway
-
-Population numbers are aggregated by Basic Statistical Units (Grunkretts). Population data on native and foreign-born residents (inclusive of children of migrants) comes from 2018.
-
-In total, Norway has 16,661 borders with 6,178 statistically significant frontiers.
-
 ## Computed variables
 
 There are two types of outputs for the Dean et al algorithm:
@@ -87,39 +74,8 @@ uk-01: Load in data from elsewhere and save it
 
 uk-02: joins the data on ttwa, census and saves
 
-uk-03: runs frontier analysis (filtered to top di due to size). Done in for forLoop
+uk-03: runs frontier analysis sequentially for each ttwa
 
 uk-04: extracts sf borders using forLoop
 
-uk-03x: experimental analysis using abs diff instead
 
-uk-04x: extract frontieirs and base layer for plots
-
-sheffield_example: Example map for GP
-
-
-# Misc
-
-**mermaid chart code**
-
-```
-graph LR
- common-00 --> uk-01
-    common-00 --> swede-01[allSwedenFrontiersNotes.R]
-  common-00 --> norway-01[norwayFrontierNotes.R]
-
-
-    subgraph UK
-  uk-01 --> uk-02
-  uk-02 --> |bayesian frontier method| uk-03
-  uk-02 --> |abs diff method| uk-03x
-  uk-03 --> |extract in forLoop| uk-04
-  uk-04 -.-> |use elsewhere| other-work
-    uk-03x --> |frontier extract| uk-04x
-  uk-04x --> sheffield_report_md
-    end
-    subgraph Norway+Sweden
-   swede-01[allSwedenFrontiersNotes.R]
-   norway-01[norwayFrontierNotes.R]
-    end
-```
