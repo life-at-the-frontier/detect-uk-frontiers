@@ -78,4 +78,6 @@ uk-03: runs frontier analysis sequentially for each ttwa
 
 uk-04: extracts sf borders using forLoop
 
+## Data 
 
+Using clipped TTWA and LSOA boundaries from here https://geoportal.statistics.gov.uk/

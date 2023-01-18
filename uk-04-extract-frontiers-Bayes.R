@@ -72,18 +72,18 @@ sfBorders_list <-
 ##  reported errors: 
 sfBorders_list$error %>%
   discard(is.null)
-# $Bristol
-# <Rcpp::eval_error in CPL_geos_op2(op, st_geometry(x), st_geometry(y)): Evaluation error: TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point 360882.91511309094 171106.81981253525 at 360882.91511309094 171106.81981253525.>
+# $Barnstaple
+# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>
 #   
-#   $Burnley
-# <Rcpp::eval_error in CPL_geos_op2(op, st_geometry(x), st_geometry(y)): Evaluation error: TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point 385903.88259071077 439853.55665713502 at 385903.88259071077 439853.55665713502.>
+#   $Chelmsford
+# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>
+#   
+#   $`Haverfordwest and Milford Haven`
+# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>
 #   
 #   $Penzance
-# <simpleError in frontier_as_sf(y, silent = T): Not a frontier_model object; please run frontier_detect()>
-#   
-#   $Yeovil
-# <Rcpp::eval_error in CPL_geos_op2(op, st_geometry(x), st_geometry(y)): Evaluation error: TopologyException: Input geom 1 is invalid: Ring Self-intersection at or near point 362040.18361719657 114934.77847173659 at 362040.18361719657 114934.77847173659.>
-
+# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>
+  
 ## Restructure as spatial dataframe.... 
 
 ## Issue: this isn't working properly

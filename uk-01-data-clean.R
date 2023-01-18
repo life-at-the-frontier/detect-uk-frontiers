@@ -44,9 +44,11 @@ census_df %>%
 lsoa11_sf <-
   st_read(
     dsn = '../data',
-    layer = 'Lower_Layer_Super_Output_Areas_December_2011_Full_Extent__Boundaries_in_England_and_Wales'
+    layer = 'LSOA_(Dec_2011)_Boundaries_Generalised_Clipped_(BGC)_EW_V3'
   )
 
+colnames(lsoa11_sf) <-
+  colnames(lsoa11_sf) %>% tolower()
 
 ## save as rds 
 lsoa11_sf %>%
@@ -61,7 +63,11 @@ lsoa11_sf %>%
 ttwa2011_sf <-
   st_read(
     dsn = '../data',
-    layer = 'Travel_to_Work_Areas_December_2011_Full_Extent_Boundaries_in_United_Kingdom'
+    layer = 'Travel_to_Work_Areas_(Dec_2011)_UGCB_in_United_Kingdom'
   )
+
+colnames(ttwa2011_sf) <-
+  colnames(ttwa2011_sf) %>% tolower()
+
 
 ttwa2011_sf %>% saveRDS('temp/ttwa 2011.rds')

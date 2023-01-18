@@ -68,10 +68,7 @@ cob_ttwa_sf <-
 # ##  we get 17 ttwa @0.90
 
 model_sf <-
-  cob_ttwa_sf %>%
-  filter(
-    ttwa11nm %in% filter_ttwa$ttwa11nm
-  )
+  cob_ttwa_sf 
 
 
 # 3. Running the model over forLoop ---------------------------------------
@@ -109,7 +106,16 @@ output_list$error %>%
   discard(is.null)
 
 ## only one error
-# $Penzance
+# $Barnstaple
+# <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
+#   
+#   $Chelmsford
+# <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
+#   
+#   $`Haverfordwest and Milford Haven`
+# <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
+#   
+#   $Penzance
 # <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
   
 
