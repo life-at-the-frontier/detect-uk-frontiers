@@ -24,3 +24,9 @@ cob_ttwa_sf <-
 ## Save ot 
 cob_ttwa_sf %>%
   saveRDS('output/lsoa layer.rds')
+
+
+# ttwa layer --------------------------------------------------------------
+
+ttwa2011_sf <- readRDS('temp/ttwa 2011.rds')
+ttwa2011_sf %>% saveRDS('output/ttwa 2011 layer.rds')
