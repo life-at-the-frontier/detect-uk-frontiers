@@ -71,3 +71,16 @@ colnames(ttwa2011_sf) <-
 
 
 ttwa2011_sf %>% saveRDS('temp/ttwa 2011.rds')
+
+
+# 4. Look up for TTWAs ----------------------------------------------------
+
+ttwa2011_lookup <-
+  read_csv(
+    '../data/Lower_Layer_Super_Output_Area_(2011)_to_Travel_to_Work_Area_(December_2011)_Lookup_in_the_United_Kingdom.csv'
+  )
+
+colnames(ttwa2011_lookup) <-
+  colnames(ttwa2011_lookup) %>% tolower()
+
+ttwa2011_lookup %>% saveRDS('temp/ttwa and lsoa lookup.rds')

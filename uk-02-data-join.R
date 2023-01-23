@@ -14,7 +14,21 @@ sapply(
 )
 
 
-##  1. Get the pop files from census ----
+# inpit/output ------------------------------------------------------------
+
+
+## 0. Start with master lookup 
+ttwa2011_lookup<- readRDS('temp/ttwa and lsoa lookup.rds')
+
+##  1. lsoa gis file and join to make cob2011_sf ----
+
+lsoa11_sf <-
+  readRDS(
+    'temp/lsoa 2011 sf.rds'
+  )
+
+
+##  2. Get the pop files from census ----
 
 cob2011_df <-
   readRDS(
@@ -27,53 +41,35 @@ cob2011_df <-
     zoneType == 'lsoa2011'
   )
 
-##  2. lsoa gis file and join to make cob2011_sf ----
+## join data 
 
-lsoa11_sf <-
-  readRDS(
-    'temp/lsoa 2011 sf.rds'
-  )
-
-cob2011_sf <-
-  lsoa11_sf %>%
+master_sf <-
+  lsoa11_sf %>% 
+  left_join(ttwa2011_lookup %>% select(-objectid)) %>% # objectid isn't a joining var
   left_join(
     cob2011_df,
     by = c('lsoa11cd' = 'zoneID')
   )
 
-cob2011_sf <-
-  cob2011_sf %>% 
+master_sf %>% summary
+
+## data cleaning 
+master_sf <-
+  master_sf %>%
   rename(
-    zoneID = lsoa11cd
-  )
-
-##  3. Load ttwa 
-
-ttwa11_sf <-
-  readRDS(
-    'temp/ttwa 2011.rds'
-  )
-
-##  get england and wales only
-ttwa11_sf <-
-  ttwa11_sf %>%
-  mutate(
-    country = ttwa11cd %>% substr(1,1)
+    zoneID = lsoa11cd,
+    zoneNm = lsoa11nm
   ) %>%
-  filter(
-    country %in% c('E', 'W')
-      )
-
-##  smaller buffer; for catching lsoa in ttwa
-ttwa11_sf <-
-  ttwa11_sf %>% st_buffer(-1)
-
-## 4. Join the cob and ttwa data
-
-cob_ttwa_sf <-
-  cob2011_sf %>%
-  st_join(ttwa11_sf)
-
+  transmute(
+    zoneID,
+    zoneNm,
+    ttwa11cd,
+    ttwa11nm,
+    zoneType,
+    allResidents,
+    ukBorn,
+    nonUKBorn
+  )
 
 
 # data check:  ------------------------------------------------------------
