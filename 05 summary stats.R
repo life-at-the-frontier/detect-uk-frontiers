@@ -42,7 +42,7 @@ ttwa_summary <-
   as.data.frame() %>%
   group_by(ttwa11nm) %>%
   summarise(
-    allResidents = sum(allResidents),
+    pop = sum(allResidents),
     di = di_func(ukBorn, nonUKBorn) %>% round(2)
 
   )
