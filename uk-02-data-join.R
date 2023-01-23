@@ -72,20 +72,9 @@ master_sf <-
   )
 
 
-# data check:  ------------------------------------------------------------
-# ##  Check panel for mutually exclusive lsoa to ttwa (not quite)
-# cob_ttwa_sf$lsoa11nm %>% duplicated() %>% sum ## 4277 duplicates -- liveable
-# 
-# ##  Where are they?
-# cob_ttwa_sf %>%
-#   filter(
-#     lsoa11nm %>% duplicated
-#   )
-# ##  seem okay
+##  end. Save the file! --------------------------------------
 
-##  5. Save the file! ----
-
-cob_ttwa_sf %>% 
+master_sf %>% 
   saveRDS(
     file = 'temp/cleaned cob lsoa ttwa.rds'
   )

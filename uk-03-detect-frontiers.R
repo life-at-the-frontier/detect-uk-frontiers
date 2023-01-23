@@ -11,7 +11,7 @@ cob_ttwa_sf <-
 # 2. Subsetting (crucial) -------------------------------------------------
 ##  The UK file of TTWA is very big best to subset by DI or pop or something 
 
-# 
+# Example
 # ##  First: Create the variable to subset yb
 # ##  Choices:
 # ##  1. population table 
@@ -106,18 +106,8 @@ output_list$error %>%
   discard(is.null)
 
 ## only one error
-# $Barnstaple
+# $Penzance
 # <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
-#   
-#   $Chelmsford
-# <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
-#   
-#   $`Haverfordwest and Milford Haven`
-# <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
-#   
-#   $Penzance
-# <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
-  
 
 # 4. Save -----------------------------------------------------------------
 
@@ -125,6 +115,5 @@ output_list$result %>%
   saveRDS(
     'temp/uk frontier model list.rds'
   )
-## This is also the base tile
 
 ##  Done

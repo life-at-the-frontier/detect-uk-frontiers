@@ -72,18 +72,8 @@ sfBorders_list <-
 ##  reported errors: 
 sfBorders_list$error %>%
   discard(is.null)
-# $Barnstaple
-# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>
-#   
-#   $Chelmsford
-# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>
-#   
-#   $`Haverfordwest and Milford Haven`
-# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>
-#   
-#   $Penzance
-# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>
-  
+# $Penzance
+# <simpleError in frontier_as_sf(y, non_frontiers = T, edgelistOnly = T, silent = T): Not a frontier_model object; please run frontier_detect()>  
 ## Restructure as spatial dataframe.... 
 
 ## Issue: this isn't working properly
