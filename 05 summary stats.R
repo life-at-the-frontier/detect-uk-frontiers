@@ -100,11 +100,10 @@ ttwa_summary <-
     frontier_rank = (frontier_stat * -1) %>% rank(ties.method = 'first'),
     di_rank = (di *-1) %>% rank(ties.method = 'first'), ## low rank = hi segregation
     
-    di_rank_txt = di_rank %>% toOrdinal(),
-    frontier_rank_txt = frontier_rank %>% toOrdinal()
+    di_rank_txt = di_rank %>% map(toOrdinal) %>% unlist,
+    frontier_rank_txt = frontier_rank %>% map(toOrdinal) %>% unlist
   )
 
-## NAs are ranked last 
 
 ## Save 
 ttwa_summary %>%
