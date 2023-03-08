@@ -85,9 +85,18 @@ model_sf <-
 #   transpose()
 model_sf$ttwa11nm %>% table
 
+# bugfix penzance ---------------------------------------------------------
+## Need to omit isle of sicilly
+# library(tmap)
+# tmap_mode('view')
+# model_sf %>% filter(ttwa11nm %in% c('Penzance')) %>% tmap::qtm() ## right Penzance has an island off the edge 
+# End
+
 output_list <-
   model_sf %>%
-#  filter(ttwa11nm %in% c('Sheffield', 'York', 'Yeovil')) %>%
+  filter(
+    !(zoneNm %in% 'Isles of Scilly 001A') ## this isle has no neighbour creating issues
+  ) %>%
   split(.$ttwa11nm) %>%
   map(.f =
         safely(function(this_data) {
@@ -105,9 +114,6 @@ output_list <-
 output_list$error %>%
   discard(is.null)
 
-## only one error
-# $Penzance
-# <simpleError in nb2listw(neighbours, glist = glist, style = style, zero.policy = zero.policy): Empty neighbour sets found>
 
 # 4. Save -----------------------------------------------------------------
 
@@ -117,3 +123,5 @@ output_list$result %>%
   )
 
 ##  Done
+
+
