@@ -32,10 +32,22 @@ cob_ttwa_sf <-
   )
 
 
-# simplify the geometries and transform to longlat -------------------------------------------------
+# transform to longlat -------------------------------------------------
 cob_ttwa_sf <- 
   cob_ttwa_sf %>% st_transform(crs = "EPSG:4326")
 
+
+# adhoc save a version just for Sheffield ---------------------------------
+
+sheff_sf <-
+  cob_ttwa_sf %>%
+  filter(ttwa == 'Sheffield (2011)')
+
+sheff_sf  %>%
+  saveRDS('output/sheffield lsoa layer.rds')
+
+
+## simplify geometry ---------------
 simple_cob_ttwa_sf <-
   ms_simplify(cob_ttwa_sf, 
               keep = 0.2, ## proportion of points to keep (bigger = better)
